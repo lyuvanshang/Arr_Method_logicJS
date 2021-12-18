@@ -2,10 +2,11 @@
 // forEach logic
 Array.prototype.forEach2 = function (callback)
 {
-    let lengthArr = this.length
-    for(let i = 0; i<lengthArr; i++)
-    {
-        callback(this[i],i)
+    for(let index in this)
+    {   
+        if(this.hasOwnPropety(index)){
+        callback(this[index],index)
+        }
     }
 }
 var arrS = [1,2,3,4,5,6,6]
@@ -18,14 +19,14 @@ arrS.forEach2(function (value,index)
 // every logic
 Array.prototype.every2 = function (callback)
 {
-    let lengthArr = this.length
-    for(let i = 0; i<lengthArr; i++)
-    {
-        if(!callback(this[i]))
-        {
-            return false
-        }
-         
+    for(let index in this)
+    {   
+        if(this.hasOwnPropety(index)){
+            if(!callback(this[index]))
+            {
+                return false
+            }
+        }  
     }
     return true
 }
@@ -40,14 +41,15 @@ var even = ars.every2(function (value)
 //some logic 
 Array.prototype.some2 = function (callback)
 {
-    let arrLength = this.length
-    for(let i = 0; i<arrLength; i++)
-    {
-        if(callback(this[i]))
-        {
-            return true
-            break
-        }
+    
+    for(let index in this)
+    {   if(this.hasOwnPropety(index)){
+             if(callback(this[index]))
+            {
+                 return true
+                 break
+            }
+        }  
     }
     return true
 }
@@ -64,12 +66,13 @@ console.log(even)
 //find logic 
 Array.prototype.find2 = function (callback)
 {
-    let arrLength = this.length
-    for(let i = 0; i < arrLength; i++)
+    for(let index in this)
     {   
-        if(callback(this[i]))
-        {
-            return this[i]
+        if(this.hasOwnProperty(index)){
+            if(callback(this[index]))
+            {
+                return this[index]
+            }
         }
     }
     return undefined
@@ -89,14 +92,14 @@ console.log(even)
 Array.prototype.filter2 = function (callback)
 {   
     let newArr = []
-    let arrLength = this.length
-    for(let i = 0; i < arrLength; i++)
-    {   
-        if(callback(this[i]))
-        {
-            return this[i]
-            newArr.push(this[i])
-        }
+    for(let index in this)
+    {   if(this.hasOwnProperty(index)){
+        let result = callback(this[index],index)
+            if(result)
+            {
+                newArr.push(this[index])
+            }
+        }   
     }
     return newArr
 }
@@ -114,11 +117,12 @@ console.log(even)
 Array.prototype.map2 = function (callback)
 {   
     let newArr = []
-    let arrLength = this.length
-    for(let i = 0; i < arrLength; i++)
+    for(let index in this)
     {   
-        let result =  callback(this[i],i)
-        newArr.push(result)
+        if( this.hasOwnProperty(index){
+            let result =  callback(this[index],index)
+            newArr.push(result)
+        }
     }
     return newArr
 }
